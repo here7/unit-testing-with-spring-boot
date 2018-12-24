@@ -6,12 +6,17 @@ import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
 
 class SomeDataServiceStub implements SomeDataService{
-
     @Override
     public int[] retrieveAllData() {
         return new int[] {1,2,3};
     }
+}
 
+class SomeDataServiceEmptyStub implements SomeDataService{
+    @Override
+    public int[] retrieveAllData() {
+        return new int[] {};
+    }
 }
 
 public class SomeBusinessStubTest {
@@ -35,14 +40,11 @@ public class SomeBusinessStubTest {
     @Test
     public void calcularSumDataServiceEmptyTest(){
         SomeBusinessImpl business = new SomeBusinessImpl();
-        business.setDataService( new SomeDataServiceStub() );
+        business.setDataService( new SomeDataServiceEmptyStub() );
 
         int current_result = business.calcularSumDataService();
         int expected_result = 0;
 
         assertEquals(expected_result, current_result);
     }
-
-
-
 }
