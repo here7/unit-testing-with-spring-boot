@@ -3,6 +3,7 @@ package com.dheredia.unitesting;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -86,5 +87,48 @@ public class ListMockTest {
 
         assertEquals("DANI", allValues.get(0));
         assertEquals("HEREDIA", allValues.get(1));
+    }
+
+
+    @Test
+    public void listPreviousSpyTest(){
+        ArrayList aListMock = mock(ArrayList.class);
+        System.out.println(aListMock.get(0));   //null
+        System.out.println(aListMock.size());   //0
+
+        aListMock.add("DANI");
+        aListMock.add("DANI HEREDIA");
+        System.out.println(aListMock.size());   //0
+
+        when(aListMock.size()).thenReturn(5);
+
+        System.out.println(aListMock.size());   //5
+
+        assertEquals(5, aListMock.size());
+    }
+
+    /**
+     * SPY by default, retains the original class behaviour (code)
+     */
+    @Test
+    public void listSpyTest(){
+        ArrayList aListSpy = spy(ArrayList.class);
+
+        aListSpy.add("Initialized");
+
+        System.out.println(aListSpy.get(0));   //Initialized
+        System.out.println(aListSpy.size());   //1
+
+        aListSpy.add("DANI");
+        aListSpy.add("DANI HEREDIA");
+        System.out.println(aListSpy.size());   //3
+
+        when(aListSpy.size()).thenReturn(5);
+        System.out.println(aListSpy.size());   //5
+
+        aListSpy.add("DANI H M");
+        System.out.println(aListSpy.size());   //5
+
+        assertEquals(5, aListSpy.size());
     }
 }
