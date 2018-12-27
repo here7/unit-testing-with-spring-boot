@@ -14,6 +14,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -76,6 +78,36 @@ public class ItemControllerTest {
                     .andExpect(status().isOk())
                     .andExpect(content().json("{\"quantity\":10,\"id\":2,\"name\":\"Item 2\",\"price\":10}"))
 //                    .andExpect(content().json("{\"id:2,name:Item2, price:10,quantity:10}"))
+                    .andReturn();
+        } catch(Exception e){
+            throw new Exception(e);
+        }
+    }
+
+    /**
+     * All items from DB
+     * @throws Exception
+     */
+    @Test
+    public void retrieveAllItemsTest() throws Exception {
+
+        /* The Bean Mocks are NULL by default. So, I give it the below value... */
+        when(businessService.retrieveAllItems()).thenReturn(
+                Arrays.asList(
+                        new Item(1,"Item 1",10,10),
+                        new Item(2,"Item 2",20,20),
+                        new Item(3,"Item 3",30,30)
+                )
+        );
+
+        RequestBuilder request = MockMvcRequestBuilders
+                .get("/all-items-from-db")
+                .accept(MediaType.APPLICATION_JSON);
+
+        try{
+            MvcResult result = mockMvc.perform(request)
+                    .andExpect(status().isOk())
+                    .andExpect(content().json("[{\"quantity\":10,\"id\":1,\"name\":\"Item 1\",\"price\":10},{\"quantity\":20,\"id\":2,\"name\":\"Item 2\",\"price\":20}, {\"quantity\":30,\"id\":3,\"name\":\"Item 3\",\"price\":30}]"))
                     .andReturn();
         } catch(Exception e){
             throw new Exception(e);

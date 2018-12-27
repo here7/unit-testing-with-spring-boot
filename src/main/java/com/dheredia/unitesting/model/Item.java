@@ -1,10 +1,29 @@
 package com.dheredia.unitesting.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+@Entity
 public class Item {
-    private final int quantity;
-    private final int id;
-    private final String name;
-    private final int price;
+
+    @Id
+    private int id;
+
+    private int quantity;
+    private String name;
+    private int price;
+
+    @Transient
+    private int value;
+
+
+    /**
+     * Default constructor for entity
+     */
+    protected Item(){
+
+    }
 
     public Item(int id, String name, int price, int quantity){
         this.id = id;
@@ -13,12 +32,12 @@ public class Item {
         this.quantity = quantity;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
     public int getId() {
         return id;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     public String getName() {
@@ -27,6 +46,14 @@ public class Item {
 
     public int getPrice() {
         return price;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 
     public String toString(){
