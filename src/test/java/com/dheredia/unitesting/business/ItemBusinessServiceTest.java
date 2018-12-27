@@ -17,10 +17,6 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)  //Initialize my Mocks and inject them
 public class ItemBusinessServiceTest {
-
-    // Way 1 ) SomeDataService dataServiceMock = mock(SomeDataService.class);
-    // Way 2) with @Mock annotation
-
     @Mock   //creates a mock that it will be injected with @InjectMocks annotation
             private ItemRepository repository;
 
@@ -29,7 +25,7 @@ public class ItemBusinessServiceTest {
 
 
     @Test
-    public void calcularSumDataServiceTest(){
+    public void retrieveAllItemsTest(){
         when(repository.findAll()).thenReturn(
                 Arrays.asList(
                         new Item(1,"Item 1",10,10),
