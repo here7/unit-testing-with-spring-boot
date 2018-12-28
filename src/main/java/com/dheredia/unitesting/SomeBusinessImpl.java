@@ -1,6 +1,8 @@
 package com.dheredia.unitesting;
 import com.dheredia.unitesting.data.SomeDataService;
 
+import java.util.Arrays;
+
 public class SomeBusinessImpl {
 
     private SomeDataService dataService;
@@ -28,12 +30,16 @@ public class SomeBusinessImpl {
      * @param data
      * @return sum;
      */
-    public int calculareSum(int[] data){
-        int sum = 0;
+    public int calculateSum(int[] data){
+
+        /*int sum = 0;
         for(int value:data){
             sum += value;
         }
-        return sum;
+        return sum;*/
+
+        //Functional Programming
+        return Arrays.stream(data).reduce(Integer::sum).orElse(0);
     }
 
     /**
@@ -41,11 +47,12 @@ public class SomeBusinessImpl {
      * @return sum;
      */
     public int calcularSumDataService(){
-        int data[] = dataService.retrieveAllData();
+        /*int data[] = dataService.retrieveAllData();
         int sum = 0;
         for(int value:data){
             sum += value;
         }
-        return sum;
+        return sum;*/
+        return Arrays.stream(dataService.retrieveAllData()).reduce(Integer::sum).orElse(0);
     }
 }

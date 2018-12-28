@@ -39,7 +39,7 @@ public class ItemControllerTest {
 
         try{
             MvcResult result = mockMvc.perform(request).andReturn();
-            assertEquals("{\"quantity\":100,\"id\":1,\"name\":\"Ball\",\"price\":10}",result.getResponse().getContentAsString());
+            assertEquals("{\"id\":1,\"quantity\":100,\"name\":\"Ball\",\"price\":10,\"value\":0}",result.getResponse().getContentAsString());
         } catch(Exception e){
             throw new Exception(e);
         }
@@ -50,7 +50,6 @@ public class ItemControllerTest {
         RequestBuilder request = MockMvcRequestBuilders
                 .get("/item")
                 .accept(MediaType.APPLICATION_JSON);
-
         try{
             MvcResult result = mockMvc.perform(request)
                     .andExpect(status().isOk())

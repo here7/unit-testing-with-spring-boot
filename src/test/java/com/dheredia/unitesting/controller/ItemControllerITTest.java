@@ -16,6 +16,9 @@ public class ItemControllerITTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    //Integration test with Mock
+    //@MockBean
+    //private ItemRepository repository;
 
     /**
      * Integration Tests
